@@ -1,65 +1,188 @@
-import Image from "next/image";
+"use client"
+
+import { useState, useEffect } from "react";
+import PixelBlast from "@/components/ui/PixelBlast";
+
+const PLANS = [
+  {
+    name: "Starter",
+    price: "$29",
+    annualPrice: "$23",
+    period: "/mo",
+    desc: "For indie creators & small projects",
+    features: [
+      "Up to 50 encrypted assets",
+      "1 paywall endpoint",
+      "Basic analytics",
+      "AES-256 encryption",
+      "Email support",
+    ],
+    cta: "Start Free Trial",
+    highlight: false,
+  },
+  {
+    name: "Pro",
+    price: "$89",
+    annualPrice: "$71",
+    period: "/mo",
+    desc: "For growing businesses & teams",
+    features: [
+      "Unlimited encrypted assets",
+      "10 paywall endpoints",
+      "Advanced analytics & logs",
+      "AES-256 + RSA encryption",
+      "Custom domain gating",
+      "Priority support",
+      "Webhook integrations",
+    ],
+    cta: "Get Pro Access",
+    highlight: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    annualPrice: "Custom",
+    period: "",
+    desc: "Full control at any scale",
+    features: [
+      "Unlimited everything",
+      "Dedicated infrastructure",
+      "SSO & SAML support",
+      "Audit logs & compliance",
+      "SLA guarantee",
+      "Dedicated account manager",
+      "On-prem option available",
+    ],
+    cta: "Talk to Sales",
+    highlight: false,
+  },
+];
+
+const FEATURES = [
+  {
+    icon: "⬡",
+    title: "Vault Encryption",
+    desc: "Military-grade AES-256 encryption for every asset. Keys are derived per-user, per-asset — zero-knowledge by default.",
+  },
+  {
+    icon: "◈",
+    title: "Paywall Engine",
+    desc: "Drop a single line of code to gate any asset behind Stripe, crypto, or custom auth. Payments unlock decryption in real-time.",
+  },
+  {
+    icon: "◎",
+    title: "Access Policies",
+    desc: "Time-limited links, per-IP restrictions, download quotas, and revocable tokens. You define the rules.",
+  },
+  {
+    icon: "⬟",
+    title: "Audit Trail",
+    desc: "Immutable access logs with timestamps, IPs, and decryption events. Compliance-ready exports in one click.",
+  },
+];
+
+const STATS = [
+  { value: "128-bit", label: "Key entropy" },
+  { value: "< 80ms", label: "Decrypt latency" },
+  { value: "99.99%", label: "Uptime SLA" },
+  { value: "SOC 2", label: "Compliant" },
+];
+
+const STEPS = [
+  {
+    num: "01",
+    title: "Upload & Encrypt",
+    body: "Drop any file. Our SDK encrypts it client-side before it ever leaves your machine. Only you hold the master key.",
+  },
+  {
+    num: "02",
+    title: "Set Your Price",
+    body: "Define access rules: one-time payment, subscription, or token-gated. Connect Stripe or crypto in seconds.",
+  },
+  {
+    num: "03",
+    title: "Share the Link",
+    body: "Distribute your paywall URL. Buyers pay → decrypt → download. You see real-time access events in your dashboard.",
+  },
+];
 
 export default function Home() {
+  const [annual, setAnnual] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(()=>setMounted(true),[]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="relative min-h-screen text-white overflow-x-hidden font-mono">
+      <div className="w-full h-screen absolute -z-10">
+        <PixelBlast
+          variant="square"
+          pixelSize={3}
+          color="#7EACB5"
+          patternScale={2}
+          patternDensity={1}
+          pixelSizeJitter={0}
+          enableRipples
+          rippleSpeed={0.2}
+          rippleThickness={0.10}
+          rippleIntensityScale={1.5}
+          liquid={false}
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={12}
+          speed={0.5}
+          edgeFade={0.01}
+          transparent
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      </div>
+
+
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="relative flex flex-col items-center justify-center min-h-screen text-center px-6">
+
+        {/* PixelBlast stays as the hero bg */}
+
+        {/* Beta badge */}
+        <div
+          className={`flex items-center gap-2 border border-[#7EACB5]/50 bg-[#00000099] font-bold text-white text-[9px] lg:text[11px] tracking-[0.14em] uppercase px-3 py-1.5 mb-8 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#6ee7b7]" />
+          Now in public beta — 500 vaults active
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Headline */}
+        <h1
+          className={`font-black leading-none mb-6 transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+          style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(52px,9vw,100px)", letterSpacing: "-0.03em" }}
+        >
+          Encrypt.<br />
+          <span className="text-[#7EACB5] drop-shadow-[0_0_20px_#7EACB5]">Gate.</span><br />
+          Get paid.
+        </h1>
+
+        {/* Subheading */}
+        <p
+          className={`text-white bg-[#00000079] p-2 rounded shadow-[0_0_50px_#000000] text-[15px] leading-relaxed max-w-md mb-10 transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+        >
+          The only paywall infrastructure built around zero-knowledge asset encryption.
+          One SDK, any asset, any price.
+        </p>
+
+        {/* CTAs */}
+        <div
+          className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-700 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+        >
+          <button className="px-8 py-3 bg-[#7EACB5] cursor-pointer text-white text-sm font-bold tracking-wider hover:bg-[#7A7EFF] hover:shadow-[0_0_32px_#6367FF88] transition-all duration-150">
+            Create your vault →
+          </button>
+          <button className="px-8 py-3 border border-white cursor-pointer text-white text-sm tracking-wider hover:bg-[#6367FF]/10 transition-all duration-150">
+            View docs
+          </button>
         </div>
-      </main>
+
+
+
+      </section>
     </div>
   );
-}
+};
