@@ -1,12 +1,8 @@
+// app/upload-raw/page.tsx   or   components/RawFileUploader.tsx
 "use client";
-import { goTo } from "@/actions/redirect";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function page() {
-  const { data: session } = useSession();
-  if(!session) goTo("/api/auth/signin");
-
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState("");
@@ -124,4 +120,4 @@ export default function page() {
       )}
     </div>
   );
-};
+}
