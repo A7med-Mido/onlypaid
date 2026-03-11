@@ -24,14 +24,17 @@ const options: NextAuthOptions = {
   secret: envs.NEXTAUTH_SECRET.toString(),
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      
       // console.log("signin",user,account,profile,email,credentials);
       return true
     },
-    // async redirect({ url, baseUrl }) {
-    //   console.log("redirect",url,baseUrl);
-    //   return baseUrl
-    // },
+    async session({ session }) {
+      // console.log(session)
+      return session
+    },
+    async redirect({ url, baseUrl }) {
+      // console.log("redirect",url,baseUrl);
+      return baseUrl
+    },
     async jwt({ token }) {
       // console.log("jwt",token);
       return token

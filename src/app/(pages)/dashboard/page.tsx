@@ -4,11 +4,10 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 
-
 export default function page() {
-  const { data: session } = useSession();
-  if(!session) goTo("/api/auth/signin");
+  const session = useSession();
   const [data, setData] = useState(null)
+  useEffect(()=>{if(session.status === "unauthenticated") goTo("/api/auth/signin")},[session.status])
 
   useEffect(()=>{
     async()=>{

@@ -9,13 +9,9 @@ const userSchema = z.object({
 
 const assetSchema = z.object({
   thumbnailImage: z.string(),
-  assets: z.array(z.object({
-    _id: z.string(),
-    size: z.number(),
-    path: z.string()
-  })),
+  assets: z.string(),
   sellerId: z.string(),
-  totalSize: z.number(),
+  size: z.number(),
   price: z.number()
 });
 

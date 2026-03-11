@@ -6,28 +6,17 @@ const asset = new Schema<AssetMongooseSchemaType>({
     type: String,
     required: true
   },
-  assets: [
-    {
-      _id: {
-        type: String,
-        index: true
-      },
-      size: {
-        type: Number,
-        required: true
-      },
-      path: {
-        type: String,
-        required: true
-      }
-    }
-  ],
+  assets: {
+    type: String,
+    required: true,
+    trim: true
+  },
   sellerId: {
     type: String,
     required: true,
     index: true
   },
-  totalSize: {
+  size: {
     type: Number,
     required: true
   },
