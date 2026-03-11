@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession();
     if(!session) {
-      return NextResponse.json({ error: "Unsupported content type" }, { status: 415 })
+      return NextResponse.json({ error: "Unauthorized user just go login" }, { status: STATUS.UNAUTHORIZED })
     }
 
     // Optional: basic content-type check
@@ -57,15 +57,15 @@ export async function POST(req: NextRequest) {
         if (totalBytes > MAX_BYTES) {
           writeStream.destroy();
           if (filePath) await unlink(filePath).catch(() => {});
-          return NextResponse.json({ error: "File too large" }, { status: 413 });
-        }
+          return NextResponse.json({ error: "File too large" }, { status: STATUS.FILE_TOO_LARGE });
+        };
 
         // write() returns boolean; false means backpressure → wait for drain
         if (!writeStream.write(value)) {
           await new Promise<void>((resolve) => writeStream.once("drain", resolve));
-        }
-      }
-    }
+        };
+      };
+    };
 
     // End the stream and wait for finish
     await new Promise<void>((resolve, reject) => {

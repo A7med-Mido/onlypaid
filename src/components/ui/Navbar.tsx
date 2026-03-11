@@ -1,8 +1,11 @@
 "use client"
 import Image from "next/image"
-
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Navbar() {
+  const{ data: session } = useSession();
+  
   return (
     <nav className="fixed sm:top-5 top-0 left-0 right-0 z-50 flex justify-center items-center">
       <div
@@ -26,19 +29,28 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8 text-[13px] tracking-wide text-white/40">
           {["Product", "Docs", "Pricing", "Blog"].map((l) => (
-            <a key={l} href="#" className="hover:text-white transition-colors duration-150 pb-0.5 hover:border-b hover:border-[#7EACB5]">
+            <a key={l} href="#" className=" dark:text-white text-black transition-colors duration-150 pb-0.5 hover:border-b hover:border-[#7EACB5]">
               {l}
             </a>
           ))}
         </div>
 
         <div className="flex items-center gap-3">
-          {/* <button className="text-[13px] px-4 py-2 border border-[#7EACB5] text-[#7EACB5] hover:bg-[#6367FF]/10 transition-colors duration-150">
-            Log in
-          </button> */}
-          <button className="text-[13px] cursor-pointer px-5 py-2 bg-[#7EACB5] text-white hover:bg-[#7EACB5] transition-all duration-150 font-bold tracking-wider">
-            Start now →
-          </button>
+          {
+            !session?
+            <Link
+              className="text-[13px] cursor-pointer px-5 py-2 bg-[#7EACB5] text-white hover:bg-[#7A7EFF] hover:text-white hover:shadow-[0_0_32px_#6367FF88] transition-all duration-150 font-bold tracking-wider"
+              href="/api/auth/signin"
+            >
+              Signin
+            </Link>:
+            <Link
+              href="/pricing"
+              className="text-[13px] cursor-pointer px-5 py-2 bg-[#7EACB5] text-white hover:bg-[#7A7EFF] hover:text-white hover:shadow-[0_0_32px_#6367FF88] transition-all duration-150 font-bold tracking-wider"
+            >
+              Start now →
+            </Link>
+          }
         </div>
       </div>
     </nav>

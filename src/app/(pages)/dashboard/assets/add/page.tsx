@@ -72,7 +72,9 @@ export default function page() {
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "500px", margin: "0 auto" }}>
+    <div 
+      className="p-8 pt-16 max-w-125"
+    >
       <h2>Raw Binary Upload (no FormData)</h2>
 
       <input

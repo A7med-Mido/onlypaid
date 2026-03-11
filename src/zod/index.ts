@@ -1,26 +1,40 @@
 import z from "zod";
 
-
 const userSchema = z.object({
-  _id: z.string(),
   name: z.string().min(2).max(30),
   email: z.email(),
-
-})
+  assetsToSell: z.array(z.string()),
+  ownedAssets: z.array(z.string())
+});
 
 const assetSchema = z.object({
-  _id: z.string(),
   thumbnailImage: z.string(),
-  assets: z.array(z.string()),
-  sellerId: z.string()
-})
-
+  assets: z.array(z.object({
+    _id: z.string(),
+    size: z.number(),
+    path: z.string()
+  })),
+  sellerId: z.string(),
+  totalSize: z.number(),
+  price: z.number()
+});
 
 const transSchema = z.object({
-  _id: z.string(),
   sellerId: z.string(),
   buyerId: z.string(),
   amount: z.number(),
   assetId: z.string(),
+});
 
-})
+const pricingSchema = z.object({
+  price: z.number(),
+  size: z.string(),
+  description: z.string(),
+  offer: z.number(),
+  
+});
+
+export type UserZodSchemaType = z.infer<typeof userSchema>;
+export type AssetZodSchemaType = z.infer<typeof assetSchema>;
+export type TransactionZodSchemaType = z.infer<typeof transSchema>;
+export type PricingZodSchemaType = z.infer<typeof pricingSchema>;
