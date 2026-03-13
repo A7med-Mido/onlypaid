@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react";
-import PixelBlast from "@/components/ui/PixelBlast";
 
 export default function Home() {
   const [annual, setAnnual] = useState(false);

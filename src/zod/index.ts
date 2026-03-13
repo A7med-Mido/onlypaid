@@ -3,16 +3,17 @@ import z from "zod";
 const userSchema = z.object({
   name: z.string().min(2).max(30),
   email: z.email(),
-  assetsToSell: z.array(z.string()),
   ownedAssets: z.array(z.string())
 });
 
 const assetSchema = z.object({
   thumbnailImage: z.string(),
-  assets: z.string(),
+  asset: z.string(),
   sellerId: z.string(),
   size: z.number(),
-  price: z.number()
+  price: z.number(),
+  description: z.string(),
+  name: z.string()
 });
 
 const transSchema = z.object({
@@ -27,7 +28,6 @@ const pricingSchema = z.object({
   size: z.string(),
   description: z.string(),
   offer: z.number(),
-  
 });
 
 export type UserZodSchemaType = z.infer<typeof userSchema>;

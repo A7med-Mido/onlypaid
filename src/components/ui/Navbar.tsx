@@ -46,9 +46,9 @@ export default function Navbar() {
             </Link>:
             <Link
               href="/pricing"
-              className="text-[13px] cursor-pointer px-5 py-2 bg-[#7EACB5] text-white hover:bg-[#7A7EFF] hover:text-white hover:shadow-[0_0_32px_#6367FF88] transition-all duration-150 font-bold tracking-wider"
+              className="text-[13px] cursor-pointer px-5 py-2 text-white drop-shadow-[0_0_20px_#7EACB5]] transition-all duration-150 font-bold tracking-wider"
             >
-              Start now →
+              Hi {session.user?.name}
             </Link>
           }
         </div>

@@ -10,12 +10,7 @@ const user = new Schema<UserMongooseSchemaType>({
   },
   name: {
     type: String,
-    default: ""
-  },
-  assetsToSell: {
-    type: [String],
-    default: [],
-    index: true
+    default: "",
   },
   ownedAssets: {
     type: [String],
