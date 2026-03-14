@@ -1,15 +1,16 @@
 import SomethingWentWrong from "@/components/pages/SomethingWentWrong";
 import PricingModel from "@/db/models/pricing.model";
+import Link from "next/link";
 
 export default async function Page() {
   try {
     const data = await PricingModel.find({})
 
     return (
-      <div className="min-h-screen pb-20 sm:pt-37 pt-25 px-6 bg-black/50">
+      <div className="min-h-screen pb-20 sm:pt-37 pt-25 px-">
         <div className="max-w-6xl mx-auto">
 
-          <h1 className="text-4xl font-bold text-center mb-16 font-obv">
+          <h1 className="text-4xl font-bold text-center mb-16 font-obv dark:text-white">
             Pricing Plans
           </h1>
 
@@ -51,9 +52,12 @@ export default async function Page() {
 
                   </div>
 
-                  <button className="w-full bg-[#67969f] hover:bg-[#7A7EFF] font-bold font-obv cursor-pointer text-white py-3 rounded-sm hover:opacity-90 transition">
-                    Choose Plan
-                  </button>
+                  <Link
+                    href="/dashboard/assets/add"
+                    className="w-full bg-[#67969f] text-center hover:bg-[#7A7EFF] font-bold font-obv cursor-pointer text-white pb-4 pt-2 rounded-sm hover:opacity-90 transition"
+                  >
+                    start now →
+                  </Link>
 
                 </div>
               );

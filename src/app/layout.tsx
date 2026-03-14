@@ -3,9 +3,10 @@ import "./globals.css";
 import { kabel, obv } from "./fonts/fonts";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
-import AuthProvider from "@/auth/AuthProvider";
+import AuthProvider from "@/providers/AuthProvider";
 import ConnectDB from "@/configs/db.config";
 import PixelBlast from "@/components/ui/PixelBlast";
+import { ThemeWrapper } from "@/providers/ThemeWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,31 +34,12 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${kabel.variable} ${obv.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <Navbar />
-          <div className="w-full h-screen absolute -z-10">
-            <PixelBlast
-              variant="square"
-              pixelSize={3}
-              color="#7EACB5"
-              patternScale={2}
-              patternDensity={1}
-              pixelSizeJitter={0}
-              enableRipples
-              rippleSpeed={0.2}
-              rippleThickness={0.10}
-              rippleIntensityScale={1.5}
-              liquid={false}
-              liquidStrength={0.12}
-              liquidRadius={1.2}
-              liquidWobbleSpeed={12}
-              speed={0.5}
-              edgeFade={0.01}
-              transparent
-            />
-          </div>
-          {children}
-        </AuthProvider>
+        <ThemeWrapper>
+          <AuthProvider>
+            <Navbar />
+            {children}
+          </AuthProvider>
+        </ThemeWrapper>
       </body>
     </html>
   );

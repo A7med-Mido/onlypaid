@@ -28,10 +28,10 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-[13px] tracking-wide text-white/40">
-          {["Products", "Docs", "Pricing", "Blog"].map((l) => (
-            <a key={l} href="#" className=" dark:text-white text-black transition-colors duration-150 pb-0.5 hover:border-b hover:border-[#7EACB5]">
+          {["products", "docs", "pricing", "blog"].map((l, index) => (
+            <Link key={index} href={l} className=" dark:text-white capitalize text-black transition-colors duration-150 pb-0.5 hover:border-b hover:border-[#7EACB5]">
               {l}
-            </a>
+            </Link>
           ))}
         </div>
 
