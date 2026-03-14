@@ -12,10 +12,20 @@ const transaction = new Schema<TransactionMongooseSchemaType>({
     required: true,
     index: true
   },
+  buyerName: {
+    type: String,
+    default: "",
+    trim: true
+  },
   amount: {
     type: Number,
     required: true,
     min: 0
+  },
+  assetName: {
+    type: String,
+    default: "",
+    trim: true
   },
   assetId: {
     type: String,

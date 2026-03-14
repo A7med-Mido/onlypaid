@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import AssetModel from "@/db/models/asset.model";
 import UserModel from "@/db/models/user.model";
 import { STATUS } from "@/constants/http";
+import TransactionModel from "@/db/models/transaction.model";
 
 export async function GET() {
   try {
@@ -16,14 +16,13 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: STATUS.NOT_FOUND });
     }
 
-    const myListings = await AssetModel.find({ sellerId: user._id.toString() })
+    const trans = await TransactionModel.find({ sellerId: user._id.toString() })
       .sort({ createdAt: -1 })
-      console.log(myListings)
 
     return NextResponse.json({
       success: true,
       name: user.name || "User",
-      listings: myListings,
+      trans: trans,
     },{
       status: STATUS.OK
     });

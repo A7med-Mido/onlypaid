@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --recharts-axis-stroke: #6b7280;
+  --recharts-axis-fill: #6b7280;
+  --recharts-grid: #e5e7eb;
 }
 
 @theme inline {
@@ -19,7 +22,9 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-
+    --recharts-axis-stroke: #9ca3af;
+    --recharts-axis-fill: #9ca3af;
+    --recharts-grid: #374151;
   }
 }
 

@@ -3,6 +3,7 @@ import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
 import envs from '../../../../configs/envs.config'
+import UserModel from '@/db/models/user.model'
 
 const options: NextAuthOptions = {
   providers: [
@@ -23,8 +24,15 @@ const options: NextAuthOptions = {
   },
   secret: envs.NEXTAUTH_SECRET.toString(),
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      // console.log("signin",user,account,profile,email,credentials);
+    async signIn({ user }) {
+      const exists = await UserModel.exists({email:user.email});
+
+      if (!exists && user.email && user.name && user.image) {
+        await UserModel.create({
+          email: user.email,
+          name: user.name,
+        })
+      }
       return true
     },
     async session({ session }) {

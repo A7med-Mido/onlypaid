@@ -1,6 +1,6 @@
 import axios from "axios"
 
-type GET = "/upload-raw" | "/auth" | "/assets";
+type GET = "/upload-raw" | "/auth" | "/assets" | "/dashboard" | "/trans";
 type POST = "/upload-raw" | "/auth" | "/assets";
 type DELETE = "/upload-raw" | "/auth" | "/assets";
 

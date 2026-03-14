@@ -1,6 +1,7 @@
 import z from "zod";
 
 const userSchema = z.object({
+  image: z.string(),
   name: z.string().min(2).max(30),
   email: z.email(),
   ownedAssets: z.array(z.string())
@@ -19,7 +20,9 @@ const assetSchema = z.object({
 const transSchema = z.object({
   sellerId: z.string(),
   buyerId: z.string(),
+  buyerName: z.string(),
   amount: z.number(),
+  assetName: z.string(),
   assetId: z.string(),
 });
 

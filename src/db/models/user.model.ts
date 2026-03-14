@@ -2,6 +2,10 @@ import { Schema, models, model, Model } from "mongoose";
 import { UserMongooseSchemaType } from "@/types";
 
 const user = new Schema<UserMongooseSchemaType>({
+  image: {
+    type: String,
+    default: ""
+  },
   email: {
     type: String,
     required: true,
