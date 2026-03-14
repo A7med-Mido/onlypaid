@@ -17,6 +17,16 @@ const assetSchema = z.object({
   name: z.string()
 });
 
+const assetCollectionSchema = z.object({
+  thumbnailImage: z.string(),
+  assets: z.array(z.string()),
+  sellerId: z.string(),
+  size: z.number(),
+  price: z.number(),
+  description: z.string(),
+  name: z.string()
+});
+
 const transSchema = z.object({
   sellerId: z.string(),
   buyerId: z.string(),
@@ -35,5 +45,6 @@ const pricingSchema = z.object({
 
 export type UserZodSchemaType = z.infer<typeof userSchema>;
 export type AssetZodSchemaType = z.infer<typeof assetSchema>;
+export type CollectionAssetZodSchemaType = z.infer<typeof assetCollectionSchema>;
 export type TransactionZodSchemaType = z.infer<typeof transSchema>;
 export type PricingZodSchemaType = z.infer<typeof pricingSchema>;

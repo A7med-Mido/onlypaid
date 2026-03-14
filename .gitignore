@@ -13,6 +13,7 @@
 /public/uploads
 
 index.ts
+delete.ts
 # testing
 /coverage
 
